@@ -1,4 +1,4 @@
-package com.southsystem.desafio.repositorio;
+package com.southsystem.desafio.repository;
 
 import org.springframework.stereotype.Repository;
 

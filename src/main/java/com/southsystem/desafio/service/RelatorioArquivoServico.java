@@ -1,7 +1,7 @@
-package com.southsystem.desafio.servicos;
+package com.southsystem.desafio.service;
 
-import com.southsystem.desafio.dominio.IArquivoLeitura;
-import com.southsystem.desafio.repositorio.RelatorioRepositorio;
+import com.southsystem.desafio.model.IArquivoLeitura;
+import com.southsystem.desafio.repository.RelatorioRepositorio;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

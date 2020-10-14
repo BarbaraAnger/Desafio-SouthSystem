@@ -1,4 +1,4 @@
-package com.southsystem.desafio.servicos;
+package com.southsystem.desafio.service;
 
 import org.springframework.stereotype.Service;
 

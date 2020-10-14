@@ -1,6 +1,6 @@
-package com.southsystem.desafio.controladoras;
+package com.southsystem.desafio.controller;
 
-import com.southsystem.desafio.servicos.RelatorioArquivoServico;
+import com.southsystem.desafio.service.RelatorioArquivoServico;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

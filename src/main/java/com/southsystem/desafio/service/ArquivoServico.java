@@ -1,18 +1,17 @@
-package com.southsystem.desafio.servicos;
+package com.southsystem.desafio.service;
 
-import com.southsystem.desafio.dominio.IArquivoLeitura;
-import com.southsystem.desafio.dominio.Venda;
-import com.southsystem.desafio.dominio.Vendedor;
-import com.southsystem.desafio.dominio.excecoes.ArquivoEntradaNaoEncontradoException;
-import com.southsystem.desafio.dominio.excecoes.ImpossivelAcessarMetodoException;
-import com.southsystem.desafio.dominio.excecoes.InstanciaIncorretaException;
-import com.southsystem.desafio.dominio.excecoes.MetodoNaoEncontradoException;
-import com.southsystem.desafio.repositorio.ArquivoRepositorio;
+import com.southsystem.desafio.model.IArquivoLeitura;
+import com.southsystem.desafio.model.Venda;
+import com.southsystem.desafio.model.Vendedor;
+import com.southsystem.desafio.exception.ArquivoEntradaNaoEncontradoException;
+import com.southsystem.desafio.exception.ImpossivelAcessarMetodoException;
+import com.southsystem.desafio.exception.InstanciaIncorretaException;
+import com.southsystem.desafio.exception.MetodoNaoEncontradoException;
+import com.southsystem.desafio.repository.ArquivoRepositorio;
 import org.reflections.Reflections;
 import org.springframework.stereotype.Service;
 
 import java.io.File;
-import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.nio.file.Files;
