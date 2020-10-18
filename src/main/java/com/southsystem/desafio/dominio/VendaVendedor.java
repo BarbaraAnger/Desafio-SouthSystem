@@ -5,7 +5,7 @@ import java.util.List;
 
 public class VendaVendedor implements IDados {
     Vendedor vendedor;
-    List<Venda> vendasDoVendedor = new ArrayList<>();
+    List<Venda> vendasVendedor = new ArrayList<>();
 
     @Override
     public VendaVendedor mapearDados(Object dados) {
@@ -50,22 +50,22 @@ public class VendaVendedor implements IDados {
         return vendedor;
     }
 
-    public List<Venda> getVendasDoVendedor() {
-        return vendasDoVendedor;
+    public List<Venda> getVendasVendedor() {
+        return vendasVendedor;
     }
 
     private void adicionarVendaVendedor(Vendedor vendedor, Venda venda, List<VendaVendedor> listaVendaVendedor) {
         this.vendedor = vendedor;
-        vendasDoVendedor.add(venda);
+        vendasVendedor.add(venda);
         listaVendaVendedor.add(this);
     }
 
     private void adicionarVendasDoVendedor(Venda venda) {
-        this.vendasDoVendedor.add(venda);
+        this.vendasVendedor.add(venda);
     }
 
     public Double rendimentosTotaisVendedor() {
-        double rendimentosTotaisDoVendedor = getVendasDoVendedor()
+        double rendimentosTotaisDoVendedor = getVendasVendedor()
                 .stream()
                 .mapToDouble(Venda::somarValorTotalDaVenda)
                 .sum();

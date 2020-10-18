@@ -14,48 +14,48 @@ public interface IArquivoLeitura {
     /**
      * Variavel que contem a extensão do arquivo.
      */
-    public final String extensao = null;
+    String extensao = null;
 
     /**
      * Método para mapear o arquivo completo.
      * @param linhas passa por parametro as linhas de um arquivo.
      * @return a leitura do arquivo.
      */
-    public IArquivoLeitura mapearEntidades(List<String> linhas);
+    IArquivoLeitura mapearEntidades(List<String> linhas);
 
     /**
      * Método para obter a extensao do arquivo.
      * @return extensao do arquivo.
      */
-    public String getExtensao();
+    String getExtensao();
 
     /**
      * Retorna uma lista de dados.
      * @return a lista de dados.
      */
-    public List<IDados> getDados();
+    List<IDados> getDados();
 
     /**
      * Método que conta clientes do arquivo.
      * @return quantidade de clientes.
      */
-    public Long contarClientes();
+    Long contarClientes();
 
     /**
      * Método para contar pessoas vendedoras.
      * @return long com a quantidade de pessoas vendedoras.
      */
-    public Long contarVendedoras();
+    Long contarVendedoras();
 
     /**
      * Método para buscar a venda mais cara.
      * @return a entidade venda, mais cara.
      */
-    public Venda buscarVendaMaisCara();
+    Venda buscarVendaMaisCara();
 
     /**
      * Método para retornar o pior vendedor.
      * @return a entidade vendedor populada, do pior vendedor.
      */
-    public Vendedor encontrarPiorVendedor();
+    Vendedor encontrarPiorVendedor();
 }

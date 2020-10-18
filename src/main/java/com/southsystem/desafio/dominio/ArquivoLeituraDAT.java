@@ -30,7 +30,7 @@ public class ArquivoLeituraDAT implements IArquivoLeitura {
                     if (linha.startsWith(idEntidade)) {
                         method = module.getMethod("mapearDados", Object.class);
                         IDados retorno = (IDados) method.invoke(classe, linha);
-                        this.dados.add(retorno);
+                        dados.add(retorno);
                     }
                 } catch (NoSuchMethodException | IllegalAccessException | InstantiationException | InvocationTargetException e) {
                     e.printStackTrace();
@@ -108,7 +108,7 @@ public class ArquivoLeituraDAT implements IArquivoLeitura {
         double maiorValor = 0;
 
         for (VendaVendedor vendaVendedor : listaVendaVendedor) {
-            for (Venda venda : vendaVendedor.getVendasDoVendedor()) {
+            for (Venda venda : vendaVendedor.getVendasVendedor()) {
                 valorTotalVenda = venda.somarValorTotalDaVenda();
                 if (Math.max(valorTotalVenda, maiorValor) == valorTotalVenda) {
                     maiorValor = valorTotalVenda;
@@ -130,7 +130,7 @@ public class ArquivoLeituraDAT implements IArquivoLeitura {
         }
 
         Vendedor piorVendedor = new Vendedor();
-        Double rendimentoTotalVendedor = null;
+        Double rendimentoTotalVendedor;
         double menorValor = 0;
 
         if (!listaVendaVendedor.isEmpty()) {

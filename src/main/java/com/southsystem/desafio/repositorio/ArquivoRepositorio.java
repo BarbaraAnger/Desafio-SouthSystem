@@ -1,13 +1,13 @@
 package com.southsystem.desafio.repositorio;
 
-import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Component;
 
 import java.io.File;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
-@Repository
+@Component
 public class ArquivoRepositorio {
     public List<File> buscarArquivosDoDiretorio() {
         String separador = File.separator;

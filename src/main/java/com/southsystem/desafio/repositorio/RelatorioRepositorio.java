@@ -1,6 +1,6 @@
 package com.southsystem.desafio.repositorio;
 
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -9,7 +9,7 @@ import java.sql.Date;
 import java.text.SimpleDateFormat;
 import java.util.List;
 
-@Service
+@Component
 public class RelatorioRepositorio {
     public void gerarArquivoRelatorioDAT(List<String> linhas) {
         String dataAtual;
