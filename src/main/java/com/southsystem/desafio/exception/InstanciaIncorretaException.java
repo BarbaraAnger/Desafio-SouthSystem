@@ -1,4 +1,4 @@
-package com.southsystem.desafio.dominio.excecoes;
+package com.southsystem.desafio.exception;
 
 public class InstanciaIncorretaException extends InstantiationException {
 

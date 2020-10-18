@@ -1,4 +1,4 @@
-package com.southsystem.desafio.dominio;
+package com.southsystem.desafio.model;
 
 import org.reflections.Reflections;
 

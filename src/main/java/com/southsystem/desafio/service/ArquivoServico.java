@@ -1,3 +1,4 @@
+<<<<<<< HEAD:src/main/java/com/southsystem/desafio/servicos/ArquivoServico.java
 package com.southsystem.desafio.servicos;
 
 import com.southsystem.desafio.dominio.IArquivoLeitura;
@@ -6,6 +7,18 @@ import com.southsystem.desafio.dominio.Vendedor;
 import com.southsystem.desafio.dominio.excecoes.*;
 
 import com.southsystem.desafio.repositorio.ArquivoRepositorio;
+=======
+package com.southsystem.desafio.service;
+
+import com.southsystem.desafio.model.IArquivoLeitura;
+import com.southsystem.desafio.model.Venda;
+import com.southsystem.desafio.model.Vendedor;
+import com.southsystem.desafio.exception.ArquivoEntradaNaoEncontradoException;
+import com.southsystem.desafio.exception.ImpossivelAcessarMetodoException;
+import com.southsystem.desafio.exception.InstanciaIncorretaException;
+import com.southsystem.desafio.exception.MetodoNaoEncontradoException;
+import com.southsystem.desafio.repository.ArquivoRepositorio;
+>>>>>>> 0b430e50c244c0a457c5c76f5d84c51fe9d8d711:src/main/java/com/southsystem/desafio/service/ArquivoServico.java
 import org.reflections.Reflections;
 import org.springframework.stereotype.Service;
 

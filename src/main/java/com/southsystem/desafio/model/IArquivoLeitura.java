@@ -1,4 +1,4 @@
-package com.southsystem.desafio.dominio;
+package com.southsystem.desafio.model;
 
 import java.util.List;
 

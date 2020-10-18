@@ -1,4 +1,4 @@
-package com.southsystem.desafio.dominio;
+package com.southsystem.desafio.model;
 
 import java.math.BigDecimal;
 import java.util.Arrays;
