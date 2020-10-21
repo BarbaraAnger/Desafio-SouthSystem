@@ -16,7 +16,12 @@ public class ArquivoController {
 
     @RequestMapping("processar-arquivos")
     public String processarArquivos() throws Exception {
-        relatorioArquivoServico.mapearDadosArquivoEscritaDAT();
-        return "Arquivo de saída gerado!";
+        try {
+            relatorioArquivoServico.mapearDadosArquivoEscritaDAT();
+            return "Arquivo de saída gerado!";
+        } catch (Exception e) {
+             e.printStackTrace();
+            throw e;
+        }
     }
 }
