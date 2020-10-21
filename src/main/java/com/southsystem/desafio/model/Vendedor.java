@@ -6,10 +6,10 @@ import java.math.BigDecimal;
 
 @Component
 public class Vendedor implements IDados {
-    String cpf;
-    String nome;
-    BigDecimal salario;
-    Double rendimentosTotais;
+    private String cpf;
+    private String nome;
+    private BigDecimal salario;
+    private Double rendimentosTotais;
 
     public Vendedor() {
     }
@@ -46,4 +46,13 @@ public class Vendedor implements IDados {
         this.rendimentosTotais = rendimentosTotais;
     }
 
+    @Override
+    public String toString() {
+        return "Vendedor{" +
+                "cpf='" + cpf + '\'' +
+                ", nome='" + nome + '\'' +
+                ", salario=" + salario +
+                ", rendimentosTotais=" + rendimentosTotais +
+                '}';
+    }
 }

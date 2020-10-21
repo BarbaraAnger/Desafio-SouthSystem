@@ -35,8 +35,4 @@ public class VendedorServico implements IDadosServico {
         return vendedor.getIdEntidade();
     }
 
-    @Override
-    public Vendedor getEntidade() {
-        return this.vendedor;
-    }
 }

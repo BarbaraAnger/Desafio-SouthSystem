@@ -15,8 +15,4 @@ public interface IDadosServico {
      */
     String getIdEntidade();
 
-    /**
-     * Metodo que retorna a entidade.
-     */
-    IDados getEntidade();
 }

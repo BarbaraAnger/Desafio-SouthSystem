@@ -4,9 +4,9 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class Item {
-    String id;
-    Integer quantidade;
-    Double preco;
+    private String id;
+    private Integer quantidade;
+    private Double preco;
 
     public Item() {
     }
@@ -29,4 +29,12 @@ public class Item {
         return this.preco;
     }
 
+    @Override
+    public String toString() {
+        return "Item{" +
+                "id='" + id + '\'' +
+                ", quantidade=" + quantidade +
+                ", preco=" + preco +
+                '}';
+    }
 }

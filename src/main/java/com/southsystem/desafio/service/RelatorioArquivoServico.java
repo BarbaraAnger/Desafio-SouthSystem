@@ -8,9 +8,9 @@ import java.util.List;
 
 @Service
 public class RelatorioArquivoServico {
-    ArquivoServico arquivoServico;
-    RelatorioServico relatorioServico;
-    RelatorioDATRepositorio relatorioDATRepositorio;
+    private ArquivoServico arquivoServico;
+    private RelatorioServico relatorioServico;
+    private RelatorioDATRepositorio relatorioDATRepositorio;
 
     @Autowired
     public RelatorioArquivoServico(ArquivoServico arquivoServico, RelatorioServico relatorioServico,

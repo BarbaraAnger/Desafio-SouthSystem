@@ -53,11 +53,6 @@ public class VendaVendedorServico implements IDadosServico {
         return vendaVendedor.getIdEntidade();
     }
 
-    @Override
-    public VendaVendedor getEntidade() {
-        return this.vendaVendedor;
-    }
-
     public void adicionarVendaVendedor(Vendedor vendedor, Venda venda, List<VendaVendedor> listaVendaVendedor) {
         vendaVendedor.setVendedor(vendedor);
         vendaVendedor.getVendasVendedor().add(venda);

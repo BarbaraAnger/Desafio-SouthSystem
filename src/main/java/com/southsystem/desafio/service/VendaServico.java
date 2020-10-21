@@ -58,8 +58,4 @@ public class VendaServico implements IDadosServico {
         return venda.getIdEntidade();
     }
 
-    @Override
-    public Venda getEntidade() {
-        return this.venda;
-    }
 }

@@ -45,4 +45,19 @@ public class Venda implements IDados {
     public String getNomeDoVendedor() {
         return nomeDoVendedor;
     }
+
+    @Override
+    public String toString() {
+        StringBuilder informacoesItems = new StringBuilder();
+
+        for (Item item : listaDeItens) {
+            informacoesItems.append(" Id: ").append(item.getId()).append(" Preço: ").append(item.getPreco()).append(" Quantidade: ").append(item.getQuantidade());
+        }
+
+        return "Venda{" +
+                "idVenda='" + idVenda + '\'' +
+                ", listaDeItens=" + informacoesItems.toString() +
+                ", nomeDoVendedor='" + nomeDoVendedor + '\'' +
+                '}';
+    }
 }

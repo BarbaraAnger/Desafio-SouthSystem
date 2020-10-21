@@ -21,7 +21,7 @@ import java.util.Set;
 
 @Service
 public class ArquivoServico {
-    ArquivoRepositorio arquivoRepositorio;
+    private ArquivoRepositorio arquivoRepositorio;
 
     @Autowired
     public ArquivoServico() {

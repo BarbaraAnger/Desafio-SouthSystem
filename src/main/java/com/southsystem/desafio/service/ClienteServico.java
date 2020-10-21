@@ -35,9 +35,4 @@ public class ClienteServico implements IDadosServico {
     public String getIdEntidade() {
         return cliente.getIdEntidade();
     }
-
-    @Override
-    public Cliente getEntidade() {
-        return this.cliente;
-    }
 }

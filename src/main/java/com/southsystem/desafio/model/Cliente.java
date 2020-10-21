@@ -41,7 +41,10 @@ public class Cliente implements IDados {
 
     @Override
     public String toString() {
-        return getNome() + getBusinessArea() + getIdEntidade();
+        return "Cliente{" +
+                "nome='" + nome + '\'' +
+                ", cnpj='" + cnpj + '\'' +
+                ", businessArea='" + businessArea + '\'' +
+                '}';
     }
-
 }
