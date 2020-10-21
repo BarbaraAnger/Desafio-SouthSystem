@@ -1,11 +1,15 @@
-package com.southsystem.desafio.model;
+package com.southsystem.desafio.service;
+
+import com.southsystem.desafio.model.IDados;
+import com.southsystem.desafio.model.Venda;
+import com.southsystem.desafio.model.Vendedor;
 
 import java.util.List;
 
 /**
  * Interface de leitura do arquivo.
  */
-public interface IArquivoLeitura {
+public interface IArquivoLeituraServico {
     /**
      * Lista que contém as linhas do arquivo.
      */
@@ -21,7 +25,7 @@ public interface IArquivoLeitura {
      * @param linhas passa por parametro as linhas de um arquivo.
      * @return a leitura do arquivo.
      */
-    IArquivoLeitura mapearEntidades(List<String> linhas);
+    IArquivoLeituraServico mapearEntidades(List<String> linhas);
 
     /**
      * Método para obter a extensao do arquivo.

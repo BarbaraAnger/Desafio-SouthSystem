@@ -1,5 +1,6 @@
-package com.southsystem.desafio.model;
+package com.southsystem.desafio.service;
 
+import com.southsystem.desafio.model.*;
 import org.reflections.Reflections;
 
 import java.lang.reflect.InvocationTargetException;
@@ -10,33 +11,34 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-public class ArquivoLeituraDAT implements IArquivoLeitura {
+public class ArquivoLeituraServicoDATServico implements IArquivoLeituraServico {
 
     private List<IDados> dados;
 
     @Override
-    public ArquivoLeituraDAT mapearEntidades(List<String> linhas) {
+    public ArquivoLeituraServicoDATServico mapearEntidades(List<String> linhas) {
         dados = new ArrayList<>();
-        Reflections reflections = new Reflections("com.southsystem.desafio.dominio");
-        Set<Class<? extends IDados>> modules = reflections.getSubTypesOf(IDados.class);
+        Reflections reflections = new Reflections("com.southsystem.desafio.service");
+        Set<Class<? extends IDadosServico>> modules = reflections.getSubTypesOf(IDadosServico.class);
         linhas.forEach(linha -> {
-            for (Class<? extends IDados> module : modules) {
+            for (Class<? extends IDadosServico> module : modules){
                 Method method;
-                Object classe;
                 try {
-                    classe = module.getConstructor().newInstance();
+                    Object classe = module.getConstructor().newInstance();
                     method = module.getMethod("getIdEntidade");
                     String idEntidade = (String) method.invoke(classe);
+
                     if (linha.startsWith(idEntidade)) {
                         method = module.getMethod("mapearDados", Object.class);
                         IDados retorno = (IDados) method.invoke(classe, linha);
                         dados.add(retorno);
                     }
-                } catch (NoSuchMethodException | IllegalAccessException | InstantiationException | InvocationTargetException e) {
-                    e.printStackTrace();
+                } catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException | InstantiationException e) {
+                    e.getMessage();
                 }
             }
         });
+
         mapearRelacoes();
         return this;
     }
@@ -45,6 +47,7 @@ public class ArquivoLeituraDAT implements IArquivoLeitura {
         List<IDados> vendas;
         List<IDados> vendedores;
         List<IDados> listaVendaVendedor = new ArrayList<>();
+
         vendas = dados
                 .stream()
                 .filter(classeDados -> classeDados instanceof Venda)
@@ -54,11 +57,12 @@ public class ArquivoLeituraDAT implements IArquivoLeitura {
                 .filter(classeDados -> classeDados instanceof Vendedor)
                 .collect(Collectors.toList());
 
+        VendaVendedorServico vendaVendedorServico = new VendaVendedorServico(new VendaVendedor());
+
         for (IDados vendedor : vendedores) {
             vendas.forEach(venda -> {
                 if (vendedor.getNome().equals(venda.getNome())) {
-                    VendaVendedor vendaVendedor = new VendaVendedor();
-                    vendaVendedor.mapearDados(Arrays.asList(venda, vendedor, listaVendaVendedor));
+                    vendaVendedorServico.mapearDados(Arrays.asList(venda, vendedor, listaVendaVendedor));
                 }
             });
         }
@@ -106,10 +110,11 @@ public class ArquivoLeituraDAT implements IArquivoLeitura {
         Venda maiorVenda = new Venda();
         Double valorTotalVenda;
         double maiorValor = 0;
+        VendaServico vendaServico = new VendaServico(new Venda());
 
         for (VendaVendedor vendaVendedor : listaVendaVendedor) {
             for (Venda venda : vendaVendedor.getVendasVendedor()) {
-                valorTotalVenda = venda.somarValorTotalDaVenda();
+                valorTotalVenda = vendaServico.somarValorTotalDaVenda(venda);
                 if (Math.max(valorTotalVenda, maiorValor) == valorTotalVenda) {
                     maiorValor = valorTotalVenda;
                     maiorVenda = venda;
@@ -129,16 +134,17 @@ public class ArquivoLeituraDAT implements IArquivoLeitura {
             }
         }
 
+        VendaVendedorServico vendaVendedorServico = new VendaVendedorServico(new VendaVendedor());
         Vendedor piorVendedor = new Vendedor();
         Double rendimentoTotalVendedor;
         double menorValor = 0;
 
         if (!listaVendaVendedor.isEmpty()) {
-            menorValor = listaVendaVendedor.get(0).rendimentosTotaisVendedor();
+            menorValor = vendaVendedorServico.rendimentosTotaisVendedor(listaVendaVendedor.get(0));
         }
 
         for (VendaVendedor vendaVendedor : listaVendaVendedor) {
-            rendimentoTotalVendedor = vendaVendedor.rendimentosTotaisVendedor();
+            rendimentoTotalVendedor = vendaVendedorServico.rendimentosTotaisVendedor(vendaVendedor);
             if (Math.min(rendimentoTotalVendedor, menorValor) == rendimentoTotalVendedor) {
                 menorValor = rendimentoTotalVendedor;
                 piorVendedor = vendaVendedor.getVendedor();

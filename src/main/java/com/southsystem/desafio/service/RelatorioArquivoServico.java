@@ -1,7 +1,6 @@
 package com.southsystem.desafio.service;
 
-import com.southsystem.desafio.model.IArquivoLeitura;
-import com.southsystem.desafio.repository.RelatorioRepositorio;
+import com.southsystem.desafio.repository.RelatorioDATRepositorio;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,18 +10,18 @@ import java.util.List;
 public class RelatorioArquivoServico {
     ArquivoServico arquivoServico;
     RelatorioServico relatorioServico;
-    RelatorioRepositorio relatorioRepositorio;
+    RelatorioDATRepositorio relatorioDATRepositorio;
 
     @Autowired
     public RelatorioArquivoServico(ArquivoServico arquivoServico, RelatorioServico relatorioServico,
-                                   RelatorioRepositorio relatorioRepositorio) {
+                                   RelatorioDATRepositorio relatorioDATRepositorio) {
         this.arquivoServico = arquivoServico;
         this.relatorioServico = relatorioServico;
-        this.relatorioRepositorio = relatorioRepositorio;
+        this.relatorioDATRepositorio = relatorioDATRepositorio;
     }
 
     public void mapearDadosArquivoEscritaDAT() throws Exception {
-        List<IArquivoLeitura> listaArquivoLeitura;
+        List<IArquivoLeituraServico> listaArquivoLeitura;
         listaArquivoLeitura = arquivoServico.mapearArquivosImplementados();
         String quantidadeClientes;
         String quantidadePessoasVendedoras;
@@ -30,13 +29,13 @@ public class RelatorioArquivoServico {
         String piorVendedor;
         List<String> dados;
 
-        quantidadeClientes = arquivoServico.contarClientes(listaArquivoLeitura).toString();
-        quantidadePessoasVendedoras = arquivoServico.contarVendedoras(listaArquivoLeitura).toString();
-        idVendaMaisCara = arquivoServico.buscarIdVendaMaisCara(listaArquivoLeitura);
-        piorVendedor = arquivoServico.encontrarPiorVendedor(listaArquivoLeitura).getNome();
+        quantidadeClientes = arquivoServico.contarClientesNoArquivo(listaArquivoLeitura).toString();
+        quantidadePessoasVendedoras = arquivoServico.contarVendedorasNoArquivo(listaArquivoLeitura).toString();
+        idVendaMaisCara = arquivoServico.buscarIdVendaMaisCaraNoArquivo(listaArquivoLeitura);
+        piorVendedor = arquivoServico.encontrarPiorVendedorNoArquivo(listaArquivoLeitura).getNome();
         dados = relatorioServico.mapearDadosRelatorioDAT(quantidadeClientes, quantidadePessoasVendedoras,
                 idVendaMaisCara, piorVendedor);
 
-        relatorioRepositorio.gerarArquivoRelatorioDAT(dados);
+        relatorioDATRepositorio.gerarArquivoRelatorioDAT(dados);
     }
 }

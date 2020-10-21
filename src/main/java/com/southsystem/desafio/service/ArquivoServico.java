@@ -1,25 +1,14 @@
-<<<<<<< HEAD:src/main/java/com/southsystem/desafio/servicos/ArquivoServico.java
-package com.southsystem.desafio.servicos;
-
-import com.southsystem.desafio.dominio.IArquivoLeitura;
-import com.southsystem.desafio.dominio.Venda;
-import com.southsystem.desafio.dominio.Vendedor;
-import com.southsystem.desafio.dominio.excecoes.*;
-
-import com.southsystem.desafio.repositorio.ArquivoRepositorio;
-=======
 package com.southsystem.desafio.service;
 
-import com.southsystem.desafio.model.IArquivoLeitura;
-import com.southsystem.desafio.model.Venda;
-import com.southsystem.desafio.model.Vendedor;
 import com.southsystem.desafio.exception.ArquivoEntradaNaoEncontradoException;
 import com.southsystem.desafio.exception.ImpossivelAcessarMetodoException;
 import com.southsystem.desafio.exception.InstanciaIncorretaException;
 import com.southsystem.desafio.exception.MetodoNaoEncontradoException;
+import com.southsystem.desafio.model.Venda;
+import com.southsystem.desafio.model.Vendedor;
 import com.southsystem.desafio.repository.ArquivoRepositorio;
->>>>>>> 0b430e50c244c0a457c5c76f5d84c51fe9d8d711:src/main/java/com/southsystem/desafio/service/ArquivoServico.java
 import org.reflections.Reflections;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.io.File;
@@ -32,14 +21,11 @@ import java.util.Set;
 
 @Service
 public class ArquivoServico {
-
     ArquivoRepositorio arquivoRepositorio;
 
+    @Autowired
     public ArquivoServico() {
-    }
-
-    public ArquivoServico(ArquivoRepositorio arquivoRepositorio) {
-        this.arquivoRepositorio = arquivoRepositorio;
+        arquivoRepositorio = new ArquivoRepositorio();
     }
 
     /**
@@ -47,17 +33,17 @@ public class ArquivoServico {
      *
      * @return lista de arquivos encontrados.
      */
-    public List<IArquivoLeitura> mapearArquivosImplementados() throws Exception {
+    public List<IArquivoLeituraServico> mapearArquivosImplementados() throws Exception {
         arquivoRepositorio = new ArquivoRepositorio();
-        Reflections reflections = new Reflections("com.southsystem.desafio.dominio");
-        Set<Class<? extends IArquivoLeitura>> modules = reflections.getSubTypesOf(IArquivoLeitura.class);
+        Reflections reflections = new Reflections("com.southsystem.desafio.model");
+        Set<Class<? extends IArquivoLeituraServico>> modules = reflections.getSubTypesOf(IArquivoLeituraServico.class);
 
         List<File> arquivosDoDiretorio;
         arquivosDoDiretorio = arquivoRepositorio.buscarArquivosDoDiretorio();
-        List<IArquivoLeitura> listaArquivoLeitura = new ArrayList<>();
+        List<IArquivoLeituraServico> listaArquivoLeitura = new ArrayList<>();
 
         for (File arquivo : arquivosDoDiretorio) {
-            for (Class<? extends IArquivoLeitura> module : modules) {
+            for (Class<? extends IArquivoLeituraServico> module : modules) {
                 Object classe;
                 Method method;
                 List<String> linhas;
@@ -66,7 +52,7 @@ public class ArquivoServico {
                     classe = module.getConstructor().newInstance();
                     method = module.getMethod("mapearEntidades", List.class);
 
-                    listaArquivoLeitura.add((IArquivoLeitura) method.invoke(classe, linhas));
+                    listaArquivoLeitura.add((IArquivoLeituraServico) method.invoke(classe, linhas));
                 } catch (InstanciaIncorretaException | MetodoNaoEncontradoException
                         | ArquivoEntradaNaoEncontradoException | InvocationTargetException | ImpossivelAcessarMetodoException e) {
                     throw e;
@@ -77,32 +63,33 @@ public class ArquivoServico {
         return listaArquivoLeitura;
     }
 
-    public Long contarClientes(List<IArquivoLeitura> listaDeArquivoLeitura) {
+    public Long contarClientesNoArquivo(List<IArquivoLeituraServico> listaDeArquivoLeitura) {
         long numeroDeClientes = 0;
-        for (IArquivoLeitura arquivo : listaDeArquivoLeitura) {
+        for (IArquivoLeituraServico arquivo : listaDeArquivoLeitura) {
             numeroDeClientes += arquivo.contarClientes();
         }
 
         return numeroDeClientes;
     }
 
-    public Long contarVendedoras(List<IArquivoLeitura> listaDeArquivoLeitura) {
+    public Long contarVendedorasNoArquivo(List<IArquivoLeituraServico> listaDeArquivoLeitura) {
         long numeroDeVendedoras = 0;
 
-        for (IArquivoLeitura arquivo : listaDeArquivoLeitura) {
+        for (IArquivoLeituraServico arquivo : listaDeArquivoLeitura) {
             numeroDeVendedoras += arquivo.contarVendedoras();
         }
 
         return numeroDeVendedoras;
     }
 
-    public String buscarIdVendaMaisCara(List<IArquivoLeitura> listaDeArquivoLeitura) {
+    public String buscarIdVendaMaisCaraNoArquivo(List<IArquivoLeituraServico> listaDeArquivoLeitura) {
         Venda maiorVenda = new Venda();
         double maiorValorVenda = 0;
         double valorVenda;
-        for (IArquivoLeitura arquivo : listaDeArquivoLeitura) {
+        for (IArquivoLeituraServico arquivo : listaDeArquivoLeitura) {
             Venda vendaMaisCara = arquivo.buscarVendaMaisCara();
-            valorVenda = vendaMaisCara.somarValorTotalDaVenda();
+            VendaServico vendaServico = new VendaServico(new Venda());
+            valorVenda = vendaServico.somarValorTotalDaVenda(vendaMaisCara);
 
             if (Math.max(valorVenda, maiorValorVenda) == valorVenda) {
                 maiorVenda = vendaMaisCara;
@@ -113,7 +100,7 @@ public class ArquivoServico {
         return maiorVenda.getIdVenda();
     }
 
-    public Vendedor encontrarPiorVendedor(List<IArquivoLeitura> listaDeArquivoLeitura) {
+    public Vendedor encontrarPiorVendedorNoArquivo(List<IArquivoLeituraServico> listaDeArquivoLeitura) {
         Vendedor piorVendedor;
         Double rendimentoTotalVendedorArquivo = null;
         Double rendimentoTotaisPiorVendedor;
@@ -121,7 +108,7 @@ public class ArquivoServico {
         piorVendedor = new Vendedor();
         rendimentoTotaisPiorVendedor = listaDeArquivoLeitura.get(0).encontrarPiorVendedor().getRendimentosTotais();
 
-        for (IArquivoLeitura arquivo : listaDeArquivoLeitura) {
+        for (IArquivoLeituraServico arquivo : listaDeArquivoLeitura) {
             Vendedor piorVendedorArquivo;
             piorVendedorArquivo = arquivo.encontrarPiorVendedor();
             rendimentoTotalVendedorArquivo = piorVendedorArquivo.getRendimentosTotais();

@@ -11,7 +11,7 @@ import java.util.List;
 
 @Component
 public class RelatorioRepositorio {
-    public void gerarArquivoRelatorioDAT(List<String> linhas) {
+    public void gerarArquivoRelatorioDAT(List<String> linhas) throws Exception {
         String dataAtual;
         String nomeArquivo;
         String separador;
@@ -23,6 +23,7 @@ public class RelatorioRepositorio {
         separador = File.separator;
         diretorio = System.getProperty("user.home") + separador + "data" + separador + "out" + separador;
         file = new File(diretorio + nomeArquivo);
+        new File(diretorio).mkdir();
 
         try (PrintWriter printWriter = new PrintWriter(file)) {
             for (String linha : linhas) {
@@ -30,9 +31,8 @@ public class RelatorioRepositorio {
             }
         } catch (FileNotFoundException e) {
             if(!file.canWrite()) {
-                System.out.println("Sem permissão para criar arquivo no diretorio.");
+                throw new Exception("Sem permissão para criar arquivo no diretorio.");
             }
-            e.printStackTrace();
         }
     }
 }
