@@ -1,26 +1,23 @@
 package com.southsystem.desafio.model;
 
-import java.math.BigDecimal;
-import java.util.Arrays;
-import java.util.List;
+import org.springframework.stereotype.Component;
 
+import java.math.BigDecimal;
+
+@Component
 public class Vendedor implements IDados {
     String cpf;
     String nome;
     BigDecimal salario;
     Double rendimentosTotais;
 
-    @Override
-    public Vendedor mapearDados(Object dados) {
-        String linha = (String) dados;
-        List<String> informacoes;
-        informacoes = Arrays.asList(linha.split("ç"));
+    public Vendedor() {
+    }
 
-        this.cpf = informacoes.get(1);
-        this.nome = informacoes.get(2);
-        this.salario = new BigDecimal(informacoes.get(3));
-
-        return this;
+    public Vendedor(String cpf, String nome, BigDecimal salario) {
+        this.cpf = cpf;
+        this.nome = nome;
+        this.salario = salario;
     }
 
     @Override
@@ -41,10 +38,6 @@ public class Vendedor implements IDados {
         return nome;
     }
 
-    public BigDecimal getSalario() {
-        return salario;
-    }
-
     public Double getRendimentosTotais() {
         return rendimentosTotais;
     }
@@ -52,4 +45,5 @@ public class Vendedor implements IDados {
     public void setRendimentosTotais(Double rendimentosTotais) {
         this.rendimentosTotais = rendimentosTotais;
     }
+
 }

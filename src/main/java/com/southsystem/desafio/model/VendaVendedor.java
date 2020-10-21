@@ -1,34 +1,21 @@
 package com.southsystem.desafio.model;
 
+import org.springframework.stereotype.Component;
+
 import java.util.ArrayList;
 import java.util.List;
 
+@Component
 public class VendaVendedor implements IDados {
-    Vendedor vendedor;
-    List<Venda> vendasVendedor = new ArrayList<>();
+    private Vendedor vendedor;
+    private List<Venda> vendasVendedor = new ArrayList<>();
 
-    @Override
-    public VendaVendedor mapearDados(Object dados) {
-        Venda venda = new Venda();
-        Vendedor vendedor = new Vendedor();
-        List<?> listaDeDados;
+    public VendaVendedor() {
+    }
 
-        listaDeDados = (List<?>) dados;
-        venda = (Venda) listaDeDados.get(0);
-        vendedor = (Vendedor) listaDeDados.get(1);
-        List<VendaVendedor> listaVendaVendedor = (List<VendaVendedor>) listaDeDados.get(2);
-
-        if (listaVendaVendedor.size() != 0) {
-            for (VendaVendedor vendaVendedor : listaVendaVendedor) {
-                if (vendaVendedor.getVendedor().getIdentificadorUnico()
-                        .equals(vendedor.getIdentificadorUnico())) {
-                    vendaVendedor.adicionarVendasDoVendedor(venda);
-                    return this;
-                }
-            }
-        }
-        adicionarVendaVendedor(vendedor, venda, listaVendaVendedor);
-        return this;
+    public VendaVendedor(Vendedor vendedor, List<Venda> vendasVendedor) {
+        this.vendedor = vendedor;
+        this.vendasVendedor = vendasVendedor;
     }
 
     @Override
@@ -50,27 +37,12 @@ public class VendaVendedor implements IDados {
         return vendedor;
     }
 
+    public void setVendedor(Vendedor vendedor) {
+        this.vendedor = vendedor;
+    }
+
     public List<Venda> getVendasVendedor() {
         return vendasVendedor;
     }
 
-    private void adicionarVendaVendedor(Vendedor vendedor, Venda venda, List<VendaVendedor> listaVendaVendedor) {
-        this.vendedor = vendedor;
-        vendasVendedor.add(venda);
-        listaVendaVendedor.add(this);
-    }
-
-    private void adicionarVendasDoVendedor(Venda venda) {
-        this.vendasVendedor.add(venda);
-    }
-
-    public Double rendimentosTotaisVendedor() {
-        double rendimentosTotaisDoVendedor = getVendasVendedor()
-                .stream()
-                .mapToDouble(Venda::somarValorTotalDaVenda)
-                .sum();
-
-        this.vendedor.setRendimentosTotais(rendimentosTotaisDoVendedor);
-        return rendimentosTotaisDoVendedor;
-    }
 }

@@ -1,22 +1,20 @@
 package com.southsystem.desafio.model;
 
-import java.util.Arrays;
-import java.util.List;
+import org.springframework.stereotype.Component;
 
+@Component
 public class Item {
     String id;
     Integer quantidade;
     Double preco;
 
-    public Item mapearEntidade(String item) {
-        List<String> informacoes;
-        informacoes = Arrays.asList(item.split("-"));
+    public Item() {
+    }
 
-        this.id = informacoes.get(0);
-        this.quantidade = Integer.valueOf(informacoes.get(1));
-        this.preco = Double.valueOf(informacoes.get(2));
-
-        return this;
+    public Item(String id, Integer quantidade, Double preco) {
+        this.id = id;
+        this.quantidade = quantidade;
+        this.preco = preco;
     }
 
     public String getId() {

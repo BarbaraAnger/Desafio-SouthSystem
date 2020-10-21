@@ -1,23 +1,20 @@
 package com.southsystem.desafio.model;
 
-import java.util.Arrays;
-import java.util.List;
+import org.springframework.stereotype.Component;
 
+@Component
 public class Cliente implements IDados {
     private String nome;
     private String cnpj;
     private String businessArea;
 
-    @Override
-    public Cliente mapearDados(Object dados) {
-        String linha = (String) dados;
-        List<String> informacoes;
-        informacoes = Arrays.asList(linha.split("ç"));
-        this.cnpj = informacoes.get(1);
-        this.nome = informacoes.get(2);
-        this.businessArea = informacoes.get(3);
+    public Cliente() {
+    }
 
-        return this;
+    public Cliente(String nome, String cnpj, String businessArea) {
+        this.nome = nome;
+        this.cnpj = cnpj;
+        this.businessArea = businessArea;
     }
 
     @Override
@@ -40,6 +37,11 @@ public class Cliente implements IDados {
 
     public String getBusinessArea() {
         return businessArea;
+    }
+
+    @Override
+    public String toString() {
+        return getNome() + getBusinessArea() + getIdEntidade();
     }
 
 }

@@ -4,27 +4,6 @@ package com.southsystem.desafio.model;
  * Interface de dados.
  */
 public interface IDados {
-    /**
-     * Retorna nome referente ao dado da entidade.
-     */
-    String nome = null;
-
-    /**
-     * Retorna id da entidade.
-     */
-    String idEntidade = null;
-
-    /**
-     * Retorna identificador unico.
-     */
-    String identificadorUnico = null;
-
-    /**
-     * Método para mapear os dados de acordo com a entidade.
-     * @param dados objeto de dados para mapear.
-     * @return dados mapeados.
-     */
-    IDados mapearDados(Object dados);
 
     /**
      * Método para pegar o id da entidade.

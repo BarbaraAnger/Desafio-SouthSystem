@@ -1,33 +1,22 @@
 package com.southsystem.desafio.model;
 
-import java.util.ArrayList;
-import java.util.Arrays;
+import org.springframework.stereotype.Component;
+
 import java.util.List;
 
+@Component
 public class Venda implements IDados {
-    String idVenda;
-    List<Item> listaDeItens;
-    String nomeDoVendedor;
+    private String idVenda;
+    private List<Item> listaDeItens;
+    private String nomeDoVendedor;
 
-    @Override
-    public Venda mapearDados(Object dados) {
-        String linha = (String) dados;
-        List<String> informacoes;
-        String itens;
-        listaDeItens = new ArrayList<>();
+    public Venda() {
+    }
 
-        informacoes = Arrays.asList(linha.split("ç"));
-        this.idVenda = informacoes.get(1);
-
-        itens = informacoes.get(2);
-        itens = itens.substring(1, itens.length() - 1);
-
-        for (String info : itens.split(",")) {
-            Item item = new Item();
-            listaDeItens.add(item.mapearEntidade(info));
-        }
-        this.nomeDoVendedor = informacoes.get(3);
-        return this;
+    public Venda(String idVenda, List<Item> listaDeItens, String nomeDoVendedor) {
+        this.idVenda = idVenda;
+        this.listaDeItens = listaDeItens;
+        this.nomeDoVendedor = nomeDoVendedor;
     }
 
     @Override
@@ -53,12 +42,7 @@ public class Venda implements IDados {
         return listaDeItens;
     }
 
-    public Double somarValorTotalDaVenda() {
-        double valorTotalDaVenda = 0;
-        for (Item item : listaDeItens) {
-            valorTotalDaVenda =+ item.getPreco() * item.getQuantidade();
-        }
-        return valorTotalDaVenda;
+    public String getNomeDoVendedor() {
+        return nomeDoVendedor;
     }
-
 }
