@@ -8,7 +8,9 @@ import java.util.List;
 import java.util.Objects;
 
 @Component
-public class ArquivoRepositorio {
+public class ArquivoRepositorio implements IArquivoRepositorio {
+
+    @Override
     public List<File> buscarArquivosDoDiretorio() {
         String separador = File.separator;
         String diretorio = System.getProperty("user.home") + separador + "data" + separador + "in";

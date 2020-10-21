@@ -10,7 +10,7 @@ import java.text.SimpleDateFormat;
 import java.util.List;
 
 @Component
-public class RelatorioRepositorio {
+public class RelatorioDATRepositorio {
     public void gerarArquivoRelatorioDAT(List<String> linhas) throws Exception {
         String dataAtual;
         String nomeArquivo;
